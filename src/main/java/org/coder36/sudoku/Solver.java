@@ -7,28 +7,47 @@ import java.util.Stack;
 public class Solver {
 
     int [][] a;  // row
-    Stack<int[][]> stack = new Stack<>();
+    Stack<int[][]> stack;
 
     public Solver(int [][] a ) {
         this.a = a;
     }
 
-    public boolean recurse() {
+    public int[][] solve() {
+        stack = new Stack<>();
+        return recurse() ? a : new int [][]{};
+    }
 
+    public boolean recurse() {
+        if ( isComplete() ) return true;
         for ( int x=0; x<9; x++ ) {
             for ( int y=0; y<9; y++ ) {
                 for ( int i=0; i<9; i++ ) {
                     if ( isAllowed( x, y, i ) ) {
-                        a[y][x] = i;
                         stack.push( a.clone() );
+                        a[y][x] = i;
                         if ( !recurse() ) {
                             a = stack.pop();
+                        } else {
+                            return true;
                         }
                     }
                 }
             }
         }
+        return false;
 
+    }
+
+    private boolean isComplete() {
+        for( int x=0; x< 9; x++ ) {
+            for ( int y=0; y<9; y++ ) {
+                if ( a[y][x] == 0 ) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     protected boolean isAllowed( int x, int y, int num ) {
