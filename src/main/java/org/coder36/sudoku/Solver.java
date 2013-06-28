@@ -16,22 +16,25 @@ public class Solver {
     public int[][] solveMe() {
         System.out.println( "here" );
         stack = new Stack<>();
+        stack.push( a.clone() );
         return recurse() ? a : new int [][]{};
     }
 
+    private int tries = 0;
+
     public boolean recurse() {
-        print( a );
+        if ( tries++ % 100000 == 0 ) {
+            System.out.println( tries );
+        }
         if ( isComplete() ) return true;
-        for ( int x=0; x<9; x++ ) {
-            for ( int y=0; y<9; y++ ) {
-                for ( int i=1; i<=9; i++ ) {
-                    if ( isAllowed( x, y, i ) ) {
-                        stack.push( a.clone() );
-                        a[y][x] = i;
-                        if ( !recurse() ) {
-                            a = stack.pop();
-                        } else {
-                            return true;
+        for ( int y=0; y<9; y++ ) {
+            for ( int x=0; x<9; x++ ) {
+                if ( a[y][x] == 0 ) {
+                    for ( int i=1; i<=9; i++ ) {
+                        if ( isAllowed( x, y, i ) ) {
+                            a[y][x] = i;
+                            if ( recurse() ) return true;
+                            a[y][x] = 0;
                         }
                     }
                 }
@@ -42,8 +45,8 @@ public class Solver {
     }
 
     private boolean isComplete() {
-        for( int x=0; x< 9; x++ ) {
-            for ( int y=0; y<9; y++ ) {
+        for( int y=0; y< 9; y++ ) {
+            for ( int x=0; x<9; x++ ) {
                 if ( a[y][x] == 0 ) {
                     return false;
                 }
@@ -53,7 +56,7 @@ public class Solver {
     }
 
     protected boolean isAllowed( int x, int y, int num ) {
-        return a[y][x] == 0 && !contains( getRow(x,y), num ) && !contains( getCol(x,y), num ) && ! contains( getSquare(x, y), num );
+        return !contains( getRow(x,y), num ) && !contains( getCol(x,y), num ) && ! contains( getSquare(x, y), num );
     }
 
     protected int [] getRow( int x, int y  ) {
@@ -72,9 +75,11 @@ public class Solver {
         int [] b = new int[9];
 
         int z = 0;
+        int ymod = (y/3) * 3;
+        int xmod = (x/3) * 3;
         for ( int i=0; i < 3; i++ ) {
             for ( int j=0; j < 3; j++ ) {
-                b[z++] = a[((y/3) * 3 )+i][ ((x/3) * 3) + j ];
+                b[z++] = a[ymod+i][xmod + j];
             }
         }
         return b;
