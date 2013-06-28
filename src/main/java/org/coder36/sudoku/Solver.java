@@ -6,23 +6,25 @@ import java.util.Stack;
  */
 public class Solver {
 
-    int [][] a;  // row
+    int [][] a;
     Stack<int[][]> stack;
 
     public Solver(int [][] a ) {
         this.a = a;
     }
 
-    public int[][] solve() {
+    public int[][] solveMe() {
+        System.out.println( "here" );
         stack = new Stack<>();
         return recurse() ? a : new int [][]{};
     }
 
     public boolean recurse() {
+        print( a );
         if ( isComplete() ) return true;
         for ( int x=0; x<9; x++ ) {
             for ( int y=0; y<9; y++ ) {
-                for ( int i=0; i<9; i++ ) {
+                for ( int i=1; i<=9; i++ ) {
                     if ( isAllowed( x, y, i ) ) {
                         stack.push( a.clone() );
                         a[y][x] = i;
@@ -51,7 +53,7 @@ public class Solver {
     }
 
     protected boolean isAllowed( int x, int y, int num ) {
-        return ! contains( getRow(x,y), num ) || contains( getCol(x,y), num ) || contains( getSquare(x, y), num );
+        return a[y][x] == 0 && !contains( getRow(x,y), num ) && !contains( getCol(x,y), num ) && ! contains( getSquare(x, y), num );
     }
 
     protected int [] getRow( int x, int y  ) {
@@ -86,7 +88,7 @@ public class Solver {
         return false;
     }
 
-    public void print() {
+    public void print(int [][] a) {
         for ( int y=0; y<9; y++ ) {
             for ( int x=0; x<9; x++ ) {
                 System.out.print( a[y][x] );
@@ -95,4 +97,6 @@ public class Solver {
         }
         System.out.println( "================" );
     }
+
+
 }

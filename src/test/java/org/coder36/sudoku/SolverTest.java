@@ -30,10 +30,12 @@ public class SolverTest {
         Solver solver = new Solver(a);
         assertArrayEquals( new int[] {8, 0, 0, 4, 0, 0, 3, 6, 7}, solver.getSquare( 3, 0 ));
         assertArrayEquals( new int[] {7, 4, 0, 3, 0, 6, 0, 0, 9}, solver.getSquare( 0, 7 ));
-        assertArrayEquals( new int[] {0, 1, 4, 8, 0, 0, 3, 0, 7}, solver.getRow( 3, 0 ));
-        assertArrayEquals( new int[] {3, 0, 6, 0, 0, 4, 0, 5, 9}, solver.getRow( 0, 7 ));
-        assertArrayEquals( new int[] {8, 4, 3, 2, 7, 0, 0, 0, 0}, solver.getCol( 3, 0 ));
-        assertArrayEquals( new int[] {0, 6, 0, 4, 0, 8, 7, 3, 0}, solver.getCol( 0, 7 ));
+        assertArrayEquals( new int[] {0, 1, 4, 8, 0, 0, 3, 0, 7}, solver.getRow(3, 0));
+        assertArrayEquals( new int[] {3, 0, 6, 0, 0, 4, 0, 5, 9}, solver.getRow(0, 7));
+        assertArrayEquals( new int[] {8, 4, 3, 2, 7, 0, 0, 0, 0}, solver.getCol(3, 0));
+        assertArrayEquals( new int[] {0, 6, 0, 4, 0, 8, 7, 3, 0}, solver.getCol(0, 7));
+
+        print( solver.solveMe() );
 
     }
 
@@ -56,12 +58,15 @@ public class SolverTest {
 
     }
 
-
-    private void print( int a[] ) {
-        for ( int i: a ) {
-            System.out.print( i );
+    public void print(int [][] a) {
+        for ( int y=0; y<9; y++ ) {
+            for ( int x=0; x<9; x++ ) {
+                System.out.print( a[y][x] );
+            }
+            System.out.print( "\n" );
         }
-        System.out.println();
+        System.out.println( "================" );
     }
+
 
 }
