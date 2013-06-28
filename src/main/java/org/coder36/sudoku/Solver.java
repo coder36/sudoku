@@ -6,18 +6,32 @@ import java.util.Stack;
  */
 public class Solver {
 
-    int [][] a;
-    Stack<int[][]> stack;
+    int [][] a = new int[9][9];
 
     public Solver(int [][] a ) {
         this.a = a;
     }
 
-    public int[][] solveMe() {
-        System.out.println( "here" );
-        stack = new Stack<>();
-        stack.push( a.clone() );
-        return recurse() ? a : new int [][]{};
+    public Solver( int [] puzzle ) {
+        int i = 0;
+        for ( int y=0; y<9; y++ ) {
+            for ( int x=0; x<9; x++ ) {
+                a[y][x] = puzzle[i++];
+            }
+        }
+    }
+
+    public int[] solveMe() {
+        recurse();
+        int b[] = new int[81];
+        int i = 0;
+        for ( int y=0; y<9; y++ ) {
+            for ( int x=0; x<9; x++ ) {
+                b[i++] =a[y][x];
+            }
+        }
+        return b;
+
     }
 
     private int tries = 0;
