@@ -34,12 +34,23 @@ public class Solver {
 
     }
 
-    private int tries = 0;
+    private long tries = 0;
+
 
     public boolean recurse() {
-        if ( tries++ % 100000 == 0 ) {
-            System.out.println( tries );
-        }
+//        if ( tries++ % 10000000 == 0 ) {
+//
+//            int q =0;
+//            for( int y=0; y< 9; y++ ) {
+//                for ( int x=0; x<9; x++ ) {
+//                    if ( a[y][x] != 0 ) {
+//                        q++;
+//                    }
+//                }
+//            }
+//            System.out.println( tries + " " + q );
+//
+//        }
         if ( isComplete() ) return true;
         for ( int y=0; y<9; y++ ) {
             for ( int x=0; x<9; x++ ) {
@@ -54,6 +65,7 @@ public class Solver {
                 }
             }
         }
+
         return false;
 
     }
