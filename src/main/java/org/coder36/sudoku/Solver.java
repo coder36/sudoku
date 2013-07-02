@@ -38,19 +38,7 @@ public class Solver {
 
 
     public boolean recurse() {
-//        if ( tries++ % 10000000 == 0 ) {
-//
-//            int q =0;
-//            for( int y=0; y< 9; y++ ) {
-//                for ( int x=0; x<9; x++ ) {
-//                    if ( a[y][x] != 0 ) {
-//                        q++;
-//                    }
-//                }
-//            }
-//            System.out.println( tries + " " + q );
-//
-//        }
+
         if ( isComplete() ) return true;
         for ( int y=0; y<9; y++ ) {
             for ( int x=0; x<9; x++ ) {
@@ -62,6 +50,7 @@ public class Solver {
                             a[y][x] = 0;
                         }
                     }
+                    return false;
                 }
             }
         }
@@ -109,6 +98,16 @@ public class Solver {
             }
         }
         return b;
+    }
+
+    protected void tryNumSquare() {
+        for( int i=1; i <=9; i++ ) {
+            for ( int y=0; y<9; y++ ) {
+                for ( int x=0; x<9; x++ ) {
+
+                }
+            }
+        }
     }
 
 
