@@ -1,12 +1,12 @@
 package org.coder36.sudoku;
 
-import java.util.Stack;
-
 /**
+ * Brute force algorithm to solve Sudoku puzzles
+ * @author Mark Middleton
  */
 public class Solver {
 
-    int [][] a = new int[9][9];
+    private int [][] a = new int[9][9];
 
     public Solver(int [][] a ) {
         this.a = a;
@@ -21,25 +21,19 @@ public class Solver {
         }
     }
 
-    public int[] solveMe() {
+    public int[] solve() {
         recurse();
         int b[] = new int[81];
         int i = 0;
         for ( int y=0; y<9; y++ ) {
             for ( int x=0; x<9; x++ ) {
-                b[i++] =a[y][x];
+                b[i++] = a[y][x];
             }
         }
         return b;
-
     }
 
-    private long tries = 0;
-
-
     public boolean recurse() {
-
-        if ( isComplete() ) return true;
         for ( int y=0; y<9; y++ ) {
             for ( int x=0; x<9; x++ ) {
                 if ( a[y][x] == 0 ) {
@@ -50,19 +44,6 @@ public class Solver {
                             a[y][x] = 0;
                         }
                     }
-                    return false;
-                }
-            }
-        }
-
-        return false;
-
-    }
-
-    private boolean isComplete() {
-        for( int y=0; y< 9; y++ ) {
-            for ( int x=0; x<9; x++ ) {
-                if ( a[y][x] == 0 ) {
                     return false;
                 }
             }
@@ -88,7 +69,6 @@ public class Solver {
 
     protected int [] getSquare( int x, int y ) {
         int [] b = new int[9];
-
         int z = 0;
         int ymod = (y/3) * 3;
         int xmod = (x/3) * 3;
@@ -100,33 +80,10 @@ public class Solver {
         return b;
     }
 
-    protected void tryNumSquare() {
-        for( int i=1; i <=9; i++ ) {
-            for ( int y=0; y<9; y++ ) {
-                for ( int x=0; x<9; x++ ) {
-
-                }
-            }
-        }
-    }
-
-
     private boolean contains( int [] list, int num ) {
         for ( int i: list ) {
             if ( i == num ) return true;
         }
         return false;
     }
-
-    public void print(int [][] a) {
-        for ( int y=0; y<9; y++ ) {
-            for ( int x=0; x<9; x++ ) {
-                System.out.print( a[y][x] );
-            }
-            System.out.print( "\n" );
-        }
-        System.out.println( "================" );
-    }
-
-
 }
