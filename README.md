@@ -88,6 +88,6 @@ Building
 
 
     git checkout https://github.com/coder36/sudoku.git
-    cd sukoku
-    mvn clean intall
+    cd sudoku
+    mvn clean install
 
